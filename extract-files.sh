@@ -82,8 +82,20 @@ function blob_fixup() {
         vendor/lib/c2.dolby.client.so | vendor/lib64/c2.dolby.client.so)
             grep -q "dolbycodec_shim.so" "${2}" || "${PATCHELF}" --add-needed "dolbycodec_shim.so" "${2}"
             ;;
-        vendor/etc/seccomp_policy/qwesd@2.0.policy)
-            echo "pipe2: 1" >> "${2}"
+        vendor/etc/vintf/manifest/c2_manifest_vendor.xml)
+            [ "$2" = "" ] && return 0
+            sed -i '/dolby/d' "${2}"
+            ;;
+        vendor/lib64/libgrpc++_unsecure_prebuilt.so)
+            [ "$2" = "" ] && return 0
+            "${PATCHELF_0_17_2}" --set-soname "libgrpc++_unsecure_prebuilt.so" "${2}"
+            ;;
+        vendor/lib64/vendor.libdpmframework.so)
+            [ "$2" = "" ] && return 0
+            "${PATCHELF_0_17_2}" --add-needed "libhidlbase_shim.so" "${2}"
+            ;;
+        *)
+            return 1
             ;;
     esac
 }
