@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 BOARD_VENDOR := motorola
 
 COMMON_PATH := device/motorola/sm8550-common
@@ -62,14 +65,15 @@ BOARD_KERNEL_CMDLINE += mem.enable_mglru=1
 BOARD_BOOTCONFIG += androidboot.hardware=qcom
 BOARD_BOOTCONFIG += androidboot.memcg=1
 BOARD_BOOTCONFIG += androidboot.usbcontroller=a600000.dwc3
-# BOARD_BOOTCONFIG += androidboot.selinux=permissive
+BOARD_BOOTCONFIG += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
+TARGET_KERNEL_ADDITIONAL_FLAGS := LLVM=1 LD=ld.lld AS=llvm-as AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 TARGET_KERNEL_SOURCE := kernel/motorola/sm8550
-TARGET_KERNEL_CLANG_VERSION := r487747c
+TARGET_KERNEL_CLANG_VERSION := r498229b
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/kalama_GKI.config \
