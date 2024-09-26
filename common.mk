@@ -256,10 +256,10 @@ $(foreach f,$(wildcard $(LOCAL_PATH)/rootdir/system/bin/*.sh),\
         $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/bin/$(notdir $f)))
 
 # IPACM
-PRODUCT_PACKAGES += \
-    ipacm \
-    IPACM_cfg.xml \
-    IPACM_Filter_cfg.xml
+#PRODUCT_PACKAGES += \
+#    ipacm \
+#    IPACM_cfg.xml \
+#    IPACM_Filter_cfg.xml
 
 # IPC router config
 PRODUCT_COPY_FILES += \
