@@ -251,6 +251,12 @@ ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
 
 # IMS
+net.lte.ims.data.enabled=true,true
+ro.qcom.ims.use_moto_vt_ext=true
+persist.dbg.ims_volte_enable=1
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=1
+persist.dbg.wfc_avail_ovr=1
 persist.vendor.lte.pco_supported=true
 persist.vendor.rcs.singlereg.feature=1
 vendor.ims.modem.multisub.cap=2
