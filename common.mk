@@ -334,9 +334,7 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/motorola \
-    kernel/motorola/sm8550 \
-    kernel/motorola/sm8550-modules
+    hardware/motorola
 
 # Telephony
 PRODUCT_PACKAGES += \
