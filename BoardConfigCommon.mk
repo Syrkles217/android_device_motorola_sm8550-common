@@ -39,7 +39,7 @@ BOARD_KERNEL_CMDLINE += mem.enable_mglru=1
 BOARD_BOOTCONFIG += androidboot.hardware=qcom
 BOARD_BOOTCONFIG += androidboot.memcg=1
 BOARD_BOOTCONFIG += androidboot.usbcontroller=a600000.dwc3
-# BOARD_BOOTCONFIG += androidboot.selinux=permissive
+BOARD_BOOTCONFIG += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -53,64 +53,66 @@ TARGET_KERNEL_CONFIG := \
     vendor/ext_config/moto-kalama-gki.config
 
 # Kernel modules
+TARGET_KERNEL_SOURCE := kernel/motorola/sm8550
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/motorola/sm8550-modules
 
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.system_dlkm))
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load))
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(COMMON_PATH)/modules.blocklist
+BOARD_SYSTEM_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.systemdlkm_blocklist.msm.kalama
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.vendor_blocklist.msm.kalama
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.vendor_boot))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(COMMON_PATH)/modules.blocklist.vendor_boot
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery $(COMMON_PATH)/modules.load.vendor_ramdisk))
 SYSTEM_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/modules.load.system_dlkm))
 
 TARGET_KERNEL_EXT_MODULES := \
-  qcom/opensource/mmrm-driver \
-  qcom/opensource/mm-drivers/hw_fence \
-  qcom/opensource/mm-drivers/msm_ext_display \
-  qcom/opensource/mm-drivers/sync_fence \
-  qcom/opensource/audio-kernel \
-  qcom/opensource/camera-kernel \
-  qcom/opensource/dataipa/drivers/platform/msm \
-  qcom/opensource/datarmnet/core \
-  qcom/opensource/datarmnet-ext/aps \
-  qcom/opensource/datarmnet-ext/offload \
-  qcom/opensource/datarmnet-ext/shs \
-  qcom/opensource/datarmnet-ext/perf \
-  qcom/opensource/datarmnet-ext/perf_tether \
-  qcom/opensource/datarmnet-ext/sch \
-  qcom/opensource/datarmnet-ext/wlan \
-  qcom/opensource/securemsm-kernel \
-  qcom/opensource/display-drivers/msm \
-  qcom/opensource/eva-kernel \
-  qcom/opensource/video-driver \
-  qcom/opensource/graphics-kernel \
-  qcom/opensource/wlan/platform \
-  qcom/opensource/wlan/qcacld-3.0/.kiwi_v2 \
-  qcom/opensource/bt-kernel \
-  nxp/opensource/driver \
-  motorola/drivers/mmi_annotate \
-  motorola/drivers/mmi_info \
-  motorola/drivers/power/bm_adsp_ulog \
-  motorola/drivers/power/mmi_charger \
-  motorola/drivers/power/qti_glink_charger \
-  motorola/drivers/power/qpnp_adaptive_charge \
-  motorola/drivers/misc/utag \
-  motorola/drivers/mmi_relay \
-  motorola/drivers/power/mmi_lpd_mitigate \
-  motorola/drivers/moto_f_usbnet \
-  motorola/drivers/misc/mmi_sys_temp \
-  motorola/drivers/power/wakeup_sources \
-  motorola/drivers/watchdogtest \
-  motorola/drivers/regulator/wl2868c \
-  motorola/drivers/sensors \
-  motorola/drivers/misc/sx937x_multi \
-  motorola/drivers/input/touchscreen/touchscreen_mmi \
-  motorola/drivers/input/touchscreen/goodix_berlin_mmi \
-  motorola/drivers/input/misc/goodix_fod_mmi \
-  motorola/drivers/moto_mm \
-  motorola/drivers/moto_mmap_fault \
-  motorola/drivers/moto_swap
+    qcom/opensource/mmrm-driver \
+    qcom/opensource/mm-drivers/hw_fence \
+    qcom/opensource/mm-drivers/msm_ext_display \
+    qcom/opensource/mm-drivers/sync_fence \
+    qcom/opensource/audio-kernel \
+    qcom/opensource/camera-kernel \
+    qcom/opensource/dataipa/drivers/platform/msm \
+    qcom/opensource/datarmnet/core \
+    qcom/opensource/datarmnet-ext/aps \
+    qcom/opensource/datarmnet-ext/offload \
+    qcom/opensource/datarmnet-ext/shs \
+    qcom/opensource/datarmnet-ext/perf \
+    qcom/opensource/datarmnet-ext/perf_tether \
+    qcom/opensource/datarmnet-ext/sch \
+    qcom/opensource/datarmnet-ext/wlan \
+    qcom/opensource/securemsm-kernel \
+    qcom/opensource/display-drivers/msm \
+    qcom/opensource/eva-kernel \
+    qcom/opensource/video-driver \
+    qcom/opensource/graphics-kernel \
+    qcom/opensource/wlan/platform \
+    qcom/opensource/wlan/qcacld-3.0/.kiwi_v2 \
+    qcom/opensource/bt-kernel \
+    nxp/opensource/driver \
+    motorola/drivers/mmi_annotate \
+    motorola/drivers/mmi_info \
+    motorola/drivers/power/bm_adsp_ulog \
+    motorola/drivers/power/mmi_charger \
+    motorola/drivers/power/qti_glink_charger \
+    motorola/drivers/power/qpnp_adaptive_charge \
+    motorola/drivers/misc/utag \
+    motorola/drivers/mmi_relay \
+    motorola/drivers/power/mmi_lpd_mitigate \
+    motorola/drivers/moto_f_usbnet \
+    motorola/drivers/misc/mmi_sys_temp \
+    motorola/drivers/power/wakeup_sources \
+    motorola/drivers/watchdogtest \
+    motorola/drivers/regulator/wl2868c \
+    motorola/drivers/sensors \
+    motorola/drivers/misc/sx937x_multi \
+    motorola/drivers/input/touchscreen/touchscreen_mmi \
+    motorola/drivers/input/touchscreen/goodix_berlin_mmi \
+    motorola/drivers/input/misc/goodix_fod_mmi \
+    motorola/drivers/moto_mm \
+    motorola/drivers/moto_mmap_fault \
+    motorola/drivers/moto_swap
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
@@ -143,7 +145,6 @@ AUDIO_FEATURE_ENABLED_DTS_EAGLE := false
 AUDIO_FEATURE_ENABLED_GEF_SUPPORT := true
 AUDIO_FEATURE_ENABLED_HW_ACCELERATED_EFFECTS := false
 AUDIO_FEATURE_ENABLED_INSTANCE_ID := true
-AUDIO_FEATURE_ENABLED_AGM_HIDL := true
 AUDIO_FEATURE_ENABLED_PAL_HIDL := true
 AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 BOARD_SUPPORTS_OPENSOURCE_STHAL := true
@@ -152,26 +153,12 @@ BOARD_USES_ALSA_AUDIO := true
 TARGET_PROVIDES_AUDIO_HAL := true
 TARGET_PROVIDES_LIBAGM := true
 TARGET_PROVIDES_LIBAR_PAL := true
-TARGET_USES_QCOM_MM_AUDIO := true
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
-
-# HIDL
-DEVICE_FRAMEWORK_MANIFEST_FILE += $(COMMON_PATH)/framework_manifest.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(COMMON_PATH)/device_framework_matrix.xml \
-    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
-DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
-DEVICE_MANIFEST_SKUS := kalama
-DEVICE_MANIFEST_KALAMA_FILES += \
-    $(COMMON_PATH)/manifest_kalama.xml \
-    hardware/qcom-caf/sm8550/audio/primary-hal/configs/common/manifest_non_qmaa.xml \
-    hardware/qcom-caf/sm8550/audio/primary-hal/configs/common/manifest_non_qmaa_extn.xml
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
@@ -241,10 +228,10 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB_EVENT := "ON"
-CONFIG_IEEE80211AX := true
 WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wlan"
 WIFI_DRIVER_STATE_OFF := "OFF"
 WIFI_DRIVER_STATE_ON := "ON"
+WIFI_FEATURE_HOSTAPD_11AX := true
 WIFI_HIDL_FEATURE_AWARE := true
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
