@@ -60,8 +60,8 @@
 # IFAA
 /(vendor|system/vendor)/bin/hw/vendor\.zui\.hardware\.ifaa@1\.0-service                 u:object_r:hal_ifaa_default_exec:s0
 
-# LiveDisplay
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.1-service\.motorola_kalama    u:object_r:hal_lineage_livedisplay_qti_exec:s0
+# Livedisplay
+/vendor/bin/hw/vendor\.lineage\.livedisplay-service\.motorola    u:object_r:hal_lineage_livedisplay_qti_exec:s0
 
 # Motobox
 /(vendor|system/vendor)/bin/motobox                     u:object_r:vendor_motobox_exec:s0
@@ -91,7 +91,8 @@
 /(vendor|system/vendor)/bin/mot_vsync_psd                                             u:object_r:vendor_mot_vsync_exec:s0
 
 # Touch
-/vendor/bin/hw/vendor\.lineage\.touch-service\.motorola    u:object_r:hal_lineage_touch_default_exec:s0
+/vendor/bin/hw/vendor\.lineage\.touch-service\.motorola                               u:object_r:hal_lineage_touch_default_exec:s0
+/vendor/bin/hw/vendor\.lineage\.touch-service\.moto_sm8550                            u:object_r:hal_lineage_touch_default_exec:s0
 
 # Thermal
 /dev/mmi_sys_temp                                       u:object_r:vendor_thermal_device:s0
